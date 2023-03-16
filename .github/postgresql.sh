@@ -14,6 +14,8 @@ sh -c "sudo apt-get update"
 
 sh -c "sudo apt-get -y install postgresql-15"
 
+sh -c "ps -ef | grep postgresql"
+
 #sh -c "sudo chown -R postgres /usr/lib/postgresql"
 #
 #sh -c "sudo chmod -R 777 /usr/lib/postgresql"
