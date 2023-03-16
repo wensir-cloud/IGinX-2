@@ -16,4 +16,6 @@ sh -c "sudo apt-get -y install postgresql-15"
 
 sh -c "ps -ef | grep postgres"
 
+sh -c "sudo systemctl status postgresql"
+
 sh -c "sudo su postgres"

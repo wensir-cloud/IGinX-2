@@ -8,8 +8,10 @@ sed -i "" "s/#storageEngineList=127.0.0.1#5432#postgresql/storageEngineList=127.
 
 sh -c "wget https://get.enterprisedb.com/postgresql/postgresql-15.2-1-osx-binaries.zip"
 
-sh -c "ls"
-
 sh -c "sudo unzip postgresql-15.2-1-osx-binaries.zip"
 
-sh -c "cd pgsql; sudo mkdir -p /usr/local/var/postgresql@15; ./bin/initdb -D /usr/local/var/postgresql@15"
+sh -c "cd pgsql"
+
+sh -c "sudo mkdir -p /usr/local/var/postgresql@15"
+
+sh -c "./bin/initdb -D /usr/local/var/postgresql@15"
