@@ -16,6 +16,6 @@ sh -c "sudo apt-get -y install postgresql-15"
 
 sh -c "sudo su postgres"
 
-sh -c "/usr/lib/postgresql/15/bin/pg_ctl start"
+sh -c "/usr/lib/postgresql/15/bin/pg_ctl -D /var/lib/postgresql/15/main start"
 
 sh -c "ps -ef | grep postgres"
