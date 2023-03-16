@@ -14,6 +14,10 @@ sh -c "sudo apt-get update"
 
 sh -c "sudo apt-get -y install postgresql-15"
 
+sh -c "sudo chmod +x /var/lib/postgresql"
+
+sh -c "/usr/lib/postgresql/15/bin/initdb -D /var/lib/postgresql/15/main --auth-local peer --auth-host scram-sha-256 --no-instructions"
+
 sh -c "sudo su postgres"
 
 sh -c "sudo systemctl status postgresql.service"
