@@ -14,13 +14,17 @@ sh -c "sudo apt-get update"
 
 sh -c "sudo apt-get -y install postgresql-15"
 
-sh -c "sudo su postgres"
+sh -c "sudo chown -R postgres /usr/lib/postgresql"
+
+sh -c "sudo chmod -R 777 /usr/lib/postgresql"
+
+sh -c "sudo rm -rf /var/lib/postgresql/15/main; sudo mkdir -p /var/lib/postgresql/15/main"
 
 sh -c "sudo chown -R postgres /var/lib/postgresql"
 
 sh -c "sudo chmod -R 777 /var/lib/postgresql"
 
-sh -c "sudo rm -rf /var/lib/postgresql/15/main; sudo mkdir -p /var/lib/postgresql/15/main"
+sh -c "sudo su postgres"
 
 sh -c "/usr/lib/postgresql/15/bin/initdb -D /var/lib/postgresql/15/main --auth-local peer --auth-host scram-sha-256 --no-instructions"
 
