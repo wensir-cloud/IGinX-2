@@ -8,7 +8,7 @@ sed -i "" "s/#storageEngineList=127.0.0.1#5432#postgresql/storageEngineList=127.
 
 sh -c "wget https://sbp.enterprisedb.com/getfile.jsp?fileid=1258319"
 
-sh -c "ll"
+sh -c "ls"
 
 sh -c "sudo unzip postgresql-15.2-1-osx-binaries.zip"
 
