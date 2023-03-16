@@ -14,8 +14,8 @@ sh -c "sudo apt-get update"
 
 sh -c "sudo apt-get -y install postgresql-15"
 
-sh -c "ps -ef | grep postgres"
-
-sh -c "sudo systemctl status postgresql"
-
 sh -c "sudo su postgres"
+
+sh -c "/usr/lib/postgresql/15/bin/pg_ctl start"
+
+sh -c "ps -ef | grep postgres"
