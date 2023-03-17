@@ -25,3 +25,5 @@ sh -c "sudo chmod -R 777 /var/lib/postgresql/15/main"
 sh -c "sudo su - postgres -c '/usr/lib/postgresql/15/bin/initdb -D /var/lib/postgresql/15/main --auth-local peer --auth-host scram-sha-256 --no-instructions'"
 
 sh -c "sudo su - postgres -c '/usr/lib/postgresql/15/bin/pg_ctl -D /var/lib/postgresql/15/main start'"
+
+sh -c "sudo su - postgres -c 'psql -c \"ALTER USER postgres WITH PASSWORD \'postgres\';\"'"
