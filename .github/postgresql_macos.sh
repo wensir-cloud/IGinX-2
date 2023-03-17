@@ -10,7 +10,7 @@ sh -c "wget https://get.enterprisedb.com/postgresql/postgresql-15.2-1-osx-binari
 
 sh -c "sudo unzip postgresql-15.2-1-osx-binaries.zip"
 
-sh -c "cd pgsql"
+sh -c "cd pgsql/bin; ls"
 
 sh -c "sudo mkdir -p /usr/local/var/postgresql@15"
 
