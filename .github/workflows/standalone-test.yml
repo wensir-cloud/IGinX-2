@@ -60,7 +60,7 @@ jobs:
         run: |
           chmod +x "${GITHUB_WORKSPACE}/.github/test_union.sh"
           if [ ${{matrix.DB-name}} == "PostgreSQL" ]; then
-            sudo su - postgres "mvn test -q -Dtest=Controller -DfailIfNoTests=false"
+            sudo su - postgres -c "mvn test -q -Dtest=Controller -DfailIfNoTests=false"
           else
             mvn test -q -Dtest=Controller -DfailIfNoTests=false
           fi
