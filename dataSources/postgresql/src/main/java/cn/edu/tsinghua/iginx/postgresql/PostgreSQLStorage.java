@@ -856,7 +856,6 @@ public class PostgreSQLStorage implements IStorage {
                 insertStatement.append(")"); // 只有一列不加括号
             }
 
-            logger.info("[Insert] {}", insertStatement);
             stmt.addBatch(insertStatement.toString());
         }
         stmt.executeBatch();
