@@ -18,6 +18,8 @@ sh -c "sudo dscl . -passwd /Users/postgres postgres"
 
 sh -c "sudo dscl . -append /Groups/admin GroupMembership postgres"
 
+sh -c "sudo reboot"
+
 sh -c "sudo mkdir -p /usr/local/var/postgresql@15"
 
 sh -c "sudo chown -R postgres /usr/local/var/postgresql@15"
