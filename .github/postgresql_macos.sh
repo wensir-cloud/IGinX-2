@@ -36,4 +36,4 @@ sh -c "sudo -u postgres /Users/runner/work/IGinX-2/IGinX-2/pgsql/bin/initdb -D /
 
 sh -c "sudo -u postgres /Users/runner/work/IGinX-2/IGinX-2/pgsql/bin/pg_ctl -D /var/lib/postgresql/15/main start"
 
-sh -c "sudo -u postgres psql -c \"ALTER USER postgres WITH PASSWORD '\''postgres'\'';\""
+sh -c "sudo -u postgres psql -c \"ALTER USER postgres WITH PASSWORD 'postgres';\""
