@@ -30,7 +30,7 @@ sh -c "sudo mkdir -p /usr/local/var/postgresql@15"
 
 sh -c "sudo chown -R postgres /usr/local/var/postgresql@15"
 
-sh -c "sudo chmod -R 777 /var/lib/postgresql/15/main"
+sh -c "sudo chmod -R 777 /usr/local/var/postgresql@15"
 
 sh -c "sudo su - postgres -c '/Users/runner/work/IGinX-2/IGinX-2/pgsql/bin/initdb -D /usr/local/var/postgresql@15'"
 
