@@ -340,21 +340,25 @@ public class PostgreSQLStorage implements IStorage {
         String columnNames;
 
         for (String pattern : patterns) {
-
             if (pattern.equals("*") || pattern.equals("*.*")) {
                 tableName = "%";
                 columnNames = "%";
             } else {
-                tableName = pattern.substring(0, pattern.lastIndexOf(".")).replace(IGINX_SEPARATOR, POSTGRESQL_SEPARATOR);
-                columnNames = pattern.substring(pattern.lastIndexOf(".") + 1);
-                boolean columnEqualsStar = columnNames.equals("*");
-                boolean tableContainsStar = tableName.contains("*");
-                if (columnEqualsStar || tableContainsStar) {
-                    tableName = tableName.replace('*', '%');
-                    if (columnEqualsStar) {
-                        columnNames = "%";
-                        if (!tableName.endsWith("%")) {
-                            tableName += "%";
+                if (pattern.split("\\" + IGINX_SEPARATOR).length == 1) { // REST 查询的路径中可能不含 .
+                    tableName = pattern;
+                    columnNames = "%";
+                } else {
+                    tableName = pattern.substring(0, pattern.lastIndexOf(".")).replace(IGINX_SEPARATOR, POSTGRESQL_SEPARATOR);
+                    columnNames = pattern.substring(pattern.lastIndexOf(".") + 1);
+                    boolean columnEqualsStar = columnNames.equals("*");
+                    boolean tableContainsStar = tableName.contains("*");
+                    if (columnEqualsStar || tableContainsStar) {
+                        tableName = tableName.replace('*', '%');
+                        if (columnEqualsStar) {
+                            columnNames = "%";
+                            if (!tableName.endsWith("%")) {
+                                tableName += "%";
+                            }
                         }
                     }
                 }

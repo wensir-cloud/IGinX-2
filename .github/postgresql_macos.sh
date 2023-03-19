@@ -10,12 +10,10 @@ sh -c "wget https://get.enterprisedb.com/postgresql/postgresql-15.2-1-osx-binari
 
 sh -c "sudo unzip postgresql-15.2-1-osx-binaries.zip"
 
-sh -c "cd pgsql/bin; pwd"
-
 sh -c "sudo mkdir -p /usr/local/var/postgresql@15"
 
-sh -c "./initdb -D /usr/local/var/postgresql@15"
+sh -c "/Users/runner/work/IGinX-2/IGinX-2/pgsql/bin/initdb -D /usr/local/var/postgresql@15"
 
-sh -c "./pg_ctl -D /usr/local/var/postgresql@15 start"
+sh -c "/Users/runner/work/IGinX-2/IGinX-2/pgsql/bin/pg_ctl -D /usr/local/var/postgresql@15 start"
 
 sh -c "psql -c \"ALTER USER postgres WITH PASSWORD 'postgres';\""
