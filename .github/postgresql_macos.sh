@@ -8,9 +8,15 @@ sed -i "" "s/#storageEngineList=127.0.0.1#5432#postgresql/storageEngineList=127.
 
 sh -c "wget https://get.enterprisedb.com/postgresql/postgresql-15.2-1-osx-binaries.zip"
 
-sh -c "sudo unzip postgresql-15.2-1-osx-binaries.zip"
+sh -c "sudo unzip -q postgresql-15.2-1-osx-binaries.zip"
 
-sh -c "sudo dscl / -append /Groups/admin GroupMembership postgres"
+sh -c "sudo dscl . -create /Users/postgres"
+
+sh -c "sudo dscl . -create /Users/postgres UserShell /bin/bash"
+
+sh -c "sudo dscl . -passwd /Users/postgres postgres"
+
+sh -c "sudo dscl . -append /Groups/admin GroupMembership postgres"
 
 sh -c "sudo mkdir -p /usr/local/var/postgresql@15"
 
