@@ -18,10 +18,10 @@ runs:
       run: |
         if [ "$RUNNER_OS" == "Linux" ]; then
           chmod +x "${GITHUB_WORKSPACE}/.github/iginx_runner_linux.sh"
-          nohup "${GITHUB_WORKSPACE}/.github/iginx_runner_linux.sh" > iginx.log 2>&1 &
+          "${GITHUB_WORKSPACE}/.github/iginx_runner_linux.sh"
         elif [ "$RUNNER_OS" == "macOS" ]; then
           chmod +x "${GITHUB_WORKSPACE}/.github/iginx_runner_macOS.sh"
-          nohup "${GITHUB_WORKSPACE}/.github/iginx_runner_macOS.sh" > iginx.log 2>&1 &
+          "${GITHUB_WORKSPACE}/.github/iginx_runner_macOS.sh"
         fi
 
     - if: inputs.if-stop=='true'

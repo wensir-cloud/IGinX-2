@@ -60,4 +60,3 @@ jobs:
         run: |
           chmod +x "${GITHUB_WORKSPACE}/.github/test_union.sh"
           mvn test -q -Dtest=Controller -DfailIfNoTests=false
-          cat iginx.log
