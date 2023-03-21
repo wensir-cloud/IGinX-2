@@ -131,7 +131,7 @@ public class PostgreSQLHistoryDataCapacityExpansionIT extends CapacityExpansionI
                 "Empty set.\n";
         SQLTestTools.executeAndCompare(session, statement, expect);
 
-        session.executeSql("remove historydataresource (\"127.0.0.1\", 6668, \"p1\", \"test\")");
+        session.executeSql("remove historydataresource (\"127.0.0.1\", 5433, \"p1\", \"test\")");
         statement = "select * from p1.test";
         expect = "ResultSets:\n" +
                 "+---+\n" +

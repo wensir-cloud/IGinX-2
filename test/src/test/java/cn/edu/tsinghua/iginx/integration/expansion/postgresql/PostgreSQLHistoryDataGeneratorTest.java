@@ -10,9 +10,9 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-public class PostgreSQLHistoryDataGenerator extends BaseHistoryDataGenerator {
+public class PostgreSQLHistoryDataGeneratorTest extends BaseHistoryDataGenerator {
 
-    private static final Logger logger = LoggerFactory.getLogger(PostgreSQLHistoryDataGenerator.class);
+    private static final Logger logger = LoggerFactory.getLogger(PostgreSQLHistoryDataGeneratorTest.class);
 
     private static final String CREATE_DATABASE_STATEMENT = "CREATE DATABASE %s;";
 
