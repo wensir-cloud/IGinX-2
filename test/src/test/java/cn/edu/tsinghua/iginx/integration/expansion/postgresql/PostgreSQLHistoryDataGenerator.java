@@ -31,6 +31,7 @@ public class PostgreSQLHistoryDataGenerator extends BaseHistoryDataGenerator {
     private Connection connect(int port) {
         try {
             String url = String.format("jdbc:postgresql://127.0.0.1:%d/?user=postgres&password=postgres", port);
+            logger.error(url);
             Class.forName("org.postgresql.Driver");
             return DriverManager.getConnection(url);
         } catch (SQLException | ClassNotFoundException e) {
