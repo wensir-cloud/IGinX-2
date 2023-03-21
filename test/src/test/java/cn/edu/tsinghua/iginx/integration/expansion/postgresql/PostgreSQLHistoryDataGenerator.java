@@ -1,7 +1,6 @@
 package cn.edu.tsinghua.iginx.integration.expansion.postgresql;
 
 import cn.edu.tsinghua.iginx.integration.expansion.BaseHistoryDataGenerator;
-import org.apache.iotdb.session.Session;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -21,9 +20,13 @@ public class PostgreSQLHistoryDataGenerator extends BaseHistoryDataGenerator {
 
     private static final String INSERT_STATEMENT = "INSERT INTO %s VALUES %s;";
 
+    private static final String DROP_DATABASE_STATEMENT = "DROP DATABASE %s;";
+
     private static final int PORT_A = 5432;
 
     private static final int PORT_B = 5433;
+
+    private static final String DATABASE_NAME = "ln";
 
     private Connection connect(int port) {
         try {
@@ -38,16 +41,17 @@ public class PostgreSQLHistoryDataGenerator extends BaseHistoryDataGenerator {
     @Test
     public void clearData() {
         try {
+            Connection connA = connect(PORT_A);
+            Statement stmtA = connA.createStatement();
+            stmtA.execute(String.format(DROP_DATABASE_STATEMENT, DATABASE_NAME));
+            stmtA.close();
+            connA.close();
 
-            Session sessionA = new Session("127.0.0.1", 6667, "root", "root");
-            sessionA.open();
-            sessionA.executeNonQueryStatement("DELETE STORAGE GROUP root.*");
-            sessionA.close();
-
-            Session sessionB = new Session("127.0.0.1", 6668, "root", "root");
-            sessionB.open();
-            sessionB.executeNonQueryStatement("DELETE STORAGE GROUP root.*");
-            sessionB.close();
+            Connection connB = connect(PORT_B);
+            Statement stmtB = connB.createStatement();
+            stmtB.execute(String.format(DROP_DATABASE_STATEMENT, DATABASE_NAME));
+            stmtB.close();
+            stmtB.close();
         } catch (Exception e) {
             logger.error(e.getMessage());
         }
@@ -64,7 +68,7 @@ public class PostgreSQLHistoryDataGenerator extends BaseHistoryDataGenerator {
 
         Statement stmt = conn.createStatement();
         try {
-            stmt.execute(String.format(CREATE_DATABASE_STATEMENT, "ln"));
+            stmt.execute(String.format(CREATE_DATABASE_STATEMENT, DATABASE_NAME));
         } catch (SQLException e) {
             logger.info("database ln exists!");
         }
@@ -88,7 +92,7 @@ public class PostgreSQLHistoryDataGenerator extends BaseHistoryDataGenerator {
 
         Statement stmt = conn.createStatement();
         try {
-            stmt.execute(String.format(CREATE_DATABASE_STATEMENT, "ln"));
+            stmt.execute(String.format(CREATE_DATABASE_STATEMENT, DATABASE_NAME));
         } catch (SQLException e) {
             logger.info("database ln exists!");
         }
