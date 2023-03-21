@@ -28,19 +28,17 @@ sh -c "sudo su - postgres -c '/usr/lib/postgresql/15/bin/pg_ctl -D /var/lib/post
 
 sh -c "sudo su - postgres -c '/usr/lib/postgresql/15/bin/psql -c \"ALTER USER postgres WITH PASSWORD '\''postgres'\'';\"'"
 
-sh -c "sudo mkdir -p /usr/lib/postgresql2/15"
+sh -c "sudo mkdir -p /usr/lib/postgresql2/15/bin"
 
 sh -c "sudo chmod -R 777 /usr/lib/postgresql/15"
 
 sh -c "sudo chmod -R 777 /usr/lib/postgresql2/15"
 
-sh -c "ls /usr/lib/postgresql/15"
+sh -c "ls /usr/lib/postgresql/15/bin"
 
-sh -c "ls /usr/lib/postgresql2/15"
+sh -c "ls /usr/lib/postgresql2/15/bin"
 
-sh -c "sudo cp -R /usr/lib/postgresql/15 /usr/lib/postgresql2/15"
-
-sh -c "ls /usr/lib/postgresql2/15"
+sh -c "sudo cp -R /usr/lib/postgresql/15/bin /usr/lib/postgresql2/15/bin"
 
 sh -c "ls /usr/lib/postgresql2/15/bin"
 
