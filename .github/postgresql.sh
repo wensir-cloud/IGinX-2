@@ -30,7 +30,7 @@ sh -c "sudo su - postgres -c '/usr/lib/postgresql/15/bin/psql -c \"ALTER USER po
 
 sh -c "sudo mkdir -p /usr/lib/postgresql2/15"
 
-sh -c "sudo cp -r /usr/lib/postgresql/15 /usr/lib/postgresql2/15"
+sh -c "sudo cp -r /usr/lib/postgresql2/15 /usr/lib/postgresql/15"
 
 sh -c "sudo mkdir -p /var/lib/postgresql2/15/main"
 
