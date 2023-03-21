@@ -204,10 +204,10 @@ public class PostgreSQLStorage implements IStorage {
                         continue;
                     }
                     DatabaseMetaData databaseMetaData = conn.getMetaData();
-                    ResultSet tableSet = databaseMetaData.getTables(databaseName, null, "%", new String[]{"TABLE"});
+                    ResultSet tableSet = databaseMetaData.getTables(databaseName, "public", "%", new String[]{"TABLE"});
                     while (tableSet.next()) {
                         String tableName = tableSet.getString("TABLE_NAME"); // 获取表名称
-                        ResultSet columnSet = databaseMetaData.getColumns(databaseName, "TABLE", tableName, "%");
+                        ResultSet columnSet = databaseMetaData.getColumns(databaseName, "public", tableName, "%");
                         while (columnSet.next()) {
                             String columnName = columnSet.getString("COLUMN_NAME"); // 获取列名称
                             String typeName = columnSet.getString("TYPE_NAME"); // 列字段类型
@@ -262,10 +262,10 @@ public class PostgreSQLStorage implements IStorage {
                     continue;
                 }
                 DatabaseMetaData databaseMetaData = conn.getMetaData();
-                ResultSet tableSet = databaseMetaData.getTables(databaseName, null, "%", new String[]{"TABLE"});
+                ResultSet tableSet = databaseMetaData.getTables(databaseName, "public", "%", new String[]{"TABLE"});
                 while (tableSet.next()) {
                     String tableName = tableSet.getString("TABLE_NAME"); // 获取表名称
-                    ResultSet columnSet = databaseMetaData.getColumns(databaseName, "TABLE", tableName, "%");
+                    ResultSet columnSet = databaseMetaData.getColumns(databaseName, "public", tableName, "%");
                     StringBuilder columnNames = new StringBuilder();
                     while (columnSet.next()) {
                         String columnName = columnSet.getString("COLUMN_NAME"); // 获取列名称
@@ -331,7 +331,7 @@ public class PostgreSQLStorage implements IStorage {
             if (!columnNames.endsWith("%")) {
                 columnNames += "%"; // 匹配 tagKV
             }
-            ResultSet rs = conn.getMetaData().getColumns(databaseName, "TABLE", tableName, columnNames);
+            ResultSet rs = conn.getMetaData().getColumns(databaseName, "public", tableName, columnNames);
             while (rs.next()) {
                 tableName = rs.getString("TABLE_NAME");
                 columnNames = rs.getString("COLUMN_NAME");
@@ -422,10 +422,10 @@ public class PostgreSQLStorage implements IStorage {
                         continue;
                     }
                     DatabaseMetaData databaseMetaData = conn.getMetaData();
-                    ResultSet tableSet = databaseMetaData.getTables(tempDatabaseName, null, tableName, new String[]{"TABLE"});
+                    ResultSet tableSet = databaseMetaData.getTables(tempDatabaseName, "public", tableName, new String[]{"TABLE"});
                     while (tableSet.next()) {
                         String tempTableName = tableSet.getString("TABLE_NAME");
-                        ResultSet columnSet = databaseMetaData.getColumns(tempDatabaseName, null, tempTableName, columnNames);
+                        ResultSet columnSet = databaseMetaData.getColumns(tempDatabaseName, "public", tempTableName, columnNames);
                         while (columnSet.next()) {
                             String tempColumnNames = columnSet.getString("COLUMN_NAME");
                             Map<String, String> tableNameToColumnNames = new HashMap<>();
@@ -443,7 +443,7 @@ public class PostgreSQLStorage implements IStorage {
                 if (conn == null) {
                     continue;
                 }
-                ResultSet rs = conn.getMetaData().getColumns(databaseName, "TABLE", tableName, columnNames);
+                ResultSet rs = conn.getMetaData().getColumns(databaseName, "public", tableName, columnNames);
                 while (rs.next()) {
                     tableName = rs.getString("TABLE_NAME");
                     columnNames = rs.getString("COLUMN_NAME");
@@ -538,14 +538,14 @@ public class PostgreSQLStorage implements IStorage {
             try {
                 Statement stmt = conn.createStatement();
                 DatabaseMetaData databaseMetaData = conn.getMetaData();
-                ResultSet tableSet = databaseMetaData.getTables(storageUnit, null, tableName, new String[]{"TABLE"});
+                ResultSet tableSet = databaseMetaData.getTables(storageUnit, "public", tableName, new String[]{"TABLE"});
                 columnName = toFullName(columnName, tags);
                 if (!tableSet.next()) {
                     String statement = String.format(CREATE_TABLE_STATEMENT, getCompleteName(tableName), getCompleteName(columnName), DataTypeTransformer.toPostgreSQL(dataType));
                     logger.info("[Create] execute create: {}", statement);
                     stmt.execute(statement);
                 } else {
-                    ResultSet columnSet = databaseMetaData.getColumns(storageUnit, "TABLE", tableName, columnName);
+                    ResultSet columnSet = databaseMetaData.getColumns(storageUnit, "public", tableName, columnName);
                     if (!columnSet.next()) {
                         String statement = String.format(ADD_COLUMN_STATEMENT, getCompleteName(tableName), getCompleteName(columnName), DataTypeTransformer.toPostgreSQL(dataType));
                         logger.info("[Create] execute create: {}", statement);
@@ -843,7 +843,7 @@ public class PostgreSQLStorage implements IStorage {
                     for (Pair<String, String> pair : deletedPaths) {
                         tableName = pair.k;
                         columnName = pair.v;
-                        tableSet = databaseMetaData.getTables(storageUnit, null, tableName, new String[]{"TABLE"});
+                        tableSet = databaseMetaData.getTables(storageUnit, "public", tableName, new String[]{"TABLE"});
                         if (tableSet.next()) {
                             statement = String.format(DROP_COLUMN_STATEMENT, getCompleteName(tableName), getCompleteName(columnName));
                             logger.info("[Delete] execute delete: {}", statement);
@@ -856,7 +856,7 @@ public class PostgreSQLStorage implements IStorage {
                 for (Pair<String, String> pair : deletedPaths) {
                     tableName = pair.k;
                     columnName = pair.v;
-                    columnSet = databaseMetaData.getColumns(storageUnit, "TABLE", tableName, columnName);
+                    columnSet = databaseMetaData.getColumns(storageUnit, "public", tableName, columnName);
                     if (columnSet.next()) {
                         for (TimeRange timeRange : delete.getTimeRanges()) {
                             statement = String.format(UPDATE_STATEMENT, getCompleteName(tableName), getCompleteName(columnName),

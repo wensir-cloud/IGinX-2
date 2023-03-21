@@ -30,7 +30,7 @@ public class Constants {
 
     public static final String CREATE_TABLE_STATEMENT = "CREATE TABLE %s (time BIGINT NOT NULL, %s %s, PRIMARY KEY(time));";
 
-    public static final String ADD_COLUMN_STATEMENT = "ALTER TABLE %s ADD COLUMN %s %s NULL;";
+    public static final String ADD_COLUMN_STATEMENT = "ALTER TABLE %s ADD COLUMN %s %s;";
 
     public static final String DROP_DATABASE_STATEMENT = "DROP DATABASE %s;";
 
