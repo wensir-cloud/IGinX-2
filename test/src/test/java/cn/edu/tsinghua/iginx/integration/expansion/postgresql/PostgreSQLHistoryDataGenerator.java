@@ -26,14 +26,17 @@ public class PostgreSQLHistoryDataGenerator extends BaseHistoryDataGenerator {
 
     private static final int PORT_B = 5433;
 
+    private static final String USERNAME = "postgres";
+
+    private static final String PASSWORD = "postgres";
+
     private static final String DATABASE_NAME = "ln";
 
     private Connection connect(int port) {
         try {
-            String url = String.format("jdbc:postgresql://127.0.0.1:%d/?user=postgres&password=postgres", port);
-            logger.error(url);
+            String url = String.format("jdbc:postgresql://127.0.0.1:%d", port);
             Class.forName("org.postgresql.Driver");
-            return DriverManager.getConnection(url);
+            return DriverManager.getConnection(url, USERNAME, PASSWORD);
         } catch (SQLException | ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
