@@ -48,4 +48,6 @@ sh -c "sudo su - postgres -c '/usr/lib/postgresql2/15/bin/pg_ctl -D /var/lib/pos
 
 sh -c "sudo su - postgres -c '/usr/lib/postgresql2/15/bin/psql -c \"ALTER USER postgres WITH PASSWORD '\''postgres'\'';\"'"
 
+sh -c "sudo su - postgres -c '/usr/lib/postgresql/15/bin/psql -c \"SELECT rolname, rolpassword FROM pg_authid;\"'"
+
 sh -c "sudo su - postgres -c '/usr/lib/postgresql2/15/bin/psql -c \"SELECT rolname, rolpassword FROM pg_authid;\"'"
