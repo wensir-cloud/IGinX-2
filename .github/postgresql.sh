@@ -34,7 +34,11 @@ sh -c "sudo chmod -R 777 /usr/lib/postgresql/15"
 
 sh -c "sudo chmod -R 777 /usr/lib/postgresql2/15"
 
-sh -c "sudo cp -r /usr/lib/postgresql/15 /usr/lib/postgresql2/15"
+sh -c "ls /usr/lib/postgresql/15"
+
+sh -c "ls /usr/lib/postgresql2/15"
+
+sh -c "sudo cp -R /usr/lib/postgresql/15 /usr/lib/postgresql2/15"
 
 sh -c "ls /usr/lib/postgresql2/15"
 
