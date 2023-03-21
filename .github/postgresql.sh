@@ -22,7 +22,7 @@ sh -c "sudo chown -R postgres /var/lib/postgresql/15/main"
 
 sh -c "sudo chmod -R 777 /var/lib/postgresql/15/main"
 
-sh -c "sudo su - postgres -c '/usr/lib/postgresql/15/bin/initdb -D /var/lib/postgresql/15/main --auth-local peer --auth-host scram-sha-256 --no-instructions'"
+sh -c "sudo su - postgres -c '/usr/lib/postgresql/15/bin/initdb -D /var/lib/postgresql/15/main --auth-local trust --auth-host scram-sha-256 --no-instructions'"
 
 sh -c "sudo su - postgres -c '/usr/lib/postgresql/15/bin/pg_ctl -D /var/lib/postgresql/15/main start'"
 
@@ -42,12 +42,8 @@ sh -c "sudo chown -R postgres /var/lib/postgresql2/15/main"
 
 sh -c "sudo chmod -R 777 /var/lib/postgresql2/15/main"
 
-sh -c "sudo su - postgres -c '/usr/lib/postgresql2/15/bin/initdb -D /var/lib/postgresql2/15/main --auth-local peer --auth-host scram-sha-256 --no-instructions'"
+sh -c "sudo su - postgres -c '/usr/lib/postgresql2/15/bin/initdb -D /var/lib/postgresql2/15/main --auth-local trust --auth-host scram-sha-256 --no-instructions'"
 
 sh -c "sudo su - postgres -c '/usr/lib/postgresql2/15/bin/pg_ctl -D /var/lib/postgresql2/15/main -o \"-F -p 5433\" start'"
 
 sh -c "sudo su - postgres -c '/usr/lib/postgresql2/15/bin/psql -c \"ALTER USER postgres WITH PASSWORD '\''postgres'\'';\"'"
-
-sh -c "sudo su - postgres -c '/usr/lib/postgresql/15/bin/psql -c \"SELECT rolname, rolpassword FROM pg_authid;\"'"
-
-sh -c "sudo su - postgres -c '/usr/lib/postgresql2/15/bin/psql -c \"SELECT rolname, rolpassword FROM pg_authid;\"'"
